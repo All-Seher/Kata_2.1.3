@@ -1,0 +1,253 @@
+Index: src/test/java/MainTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>//import app.config.AppConfig;\r\n//import app.model.AnimalsCage;\r\n//import org.junit.Assert;\r\n//import org.junit.Test;\r\n//import org.junit.runner.RunWith;\r\n//import org.springframework.beans.factory.annotation.Autowired;\r\n//import org.springframework.context.ApplicationContext;\r\n//import org.springframework.test.context.ContextConfiguration;\r\n//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;\r\n//\r\n//@RunWith(SpringJUnit4ClassRunner.class)\r\n//@ContextConfiguration(classes = AppConfig.class)\r\n//public class MainTest {\r\n//\r\n//    @Autowired\r\n//    private ApplicationContext applicationContext;\r\n//\r\n//    @Test\r\n//    public void mainTest() {\r\n//        long time = 0;\r\n//        for (int i = 0; i < 5; i++) {\r\n//            AnimalsCage bean =\r\n//                    applicationContext.getBean(AnimalsCage.class);\r\n//            if (i == 0) {\r\n//                time = bean.getTimer().getTime();\r\n//                continue;\r\n//            }\r\n//            Assert.assertEquals(\"Тест провален, не корректная реализация бинов.\", time, bean.getTimer().getTime().longValue());\r\n//            System.out.println(time);\r\n//        }\r\n//    }\r\n//}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/MainTest.java b/src/test/java/MainTest.java
+--- a/src/test/java/MainTest.java	(revision c5937ff3d86ca96d723141c887ee150c306f49e4)
++++ b/src/test/java/MainTest.java	(date 1709477918440)
+@@ -1,32 +1,32 @@
+-//import app.config.AppConfig;
+-//import app.model.AnimalsCage;
+-//import org.junit.Assert;
+-//import org.junit.Test;
+-//import org.junit.runner.RunWith;
+-//import org.springframework.beans.factory.annotation.Autowired;
+-//import org.springframework.context.ApplicationContext;
+-//import org.springframework.test.context.ContextConfiguration;
+-//import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+-//
+-//@RunWith(SpringJUnit4ClassRunner.class)
+-//@ContextConfiguration(classes = AppConfig.class)
+-//public class MainTest {
+-//
+-//    @Autowired
+-//    private ApplicationContext applicationContext;
+-//
+-//    @Test
+-//    public void mainTest() {
+-//        long time = 0;
+-//        for (int i = 0; i < 5; i++) {
+-//            AnimalsCage bean =
+-//                    applicationContext.getBean(AnimalsCage.class);
+-//            if (i == 0) {
+-//                time = bean.getTimer().getTime();
+-//                continue;
+-//            }
+-//            Assert.assertEquals("Тест провален, не корректная реализация бинов.", time, bean.getTimer().getTime().longValue());
+-//            System.out.println(time);
+-//        }
+-//    }
+-//}
++import app.config.AppConfig;
++import app.model.AnimalsCage;
++import org.junit.Assert;
++import org.junit.Test;
++import org.junit.runner.RunWith;
++import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.context.ApplicationContext;
++import org.springframework.test.context.ContextConfiguration;
++import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
++
++@RunWith(SpringJUnit4ClassRunner.class)
++@ContextConfiguration(classes = AppConfig.class)
++public class MainTest {
++
++    @Autowired
++    private ApplicationContext applicationContext;
++
++    @Test
++    public void mainTest() {
++        long time = 0;
++        for (int i = 0; i < 5; i++) {
++            AnimalsCage bean =
++                    applicationContext.getBean(AnimalsCage.class);
++            if (i == 0) {
++                time = bean.getTimer().getTime();
++                continue;
++            }
++            Assert.assertEquals("Тест провален, не корректная реализация бинов.", time, bean.getTimer().getTime().longValue());
++            System.out.println(time);
++        }
++    }
++}
+Index: src/main/java/app/model/Timer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package app.model;\r\n\r\npublic class Timer {\r\n\r\n    private Long nanoTime = System.nanoTime();\r\n\r\n    public Long getTime() {\r\n        return nanoTime;\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/app/model/Timer.java b/src/main/java/app/model/Timer.java
+--- a/src/main/java/app/model/Timer.java	(revision c5937ff3d86ca96d723141c887ee150c306f49e4)
++++ b/src/main/java/app/model/Timer.java	(date 1709478436752)
+@@ -1,5 +1,8 @@
+ package app.model;
+ 
++import org.springframework.stereotype.Component;
++
++@Component
+ public class Timer {
+ 
+     private Long nanoTime = System.nanoTime();
+Index: src/main/java/app/config/AppConfig.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package app.config;\r\n\r\nimport org.springframework.context.annotation.ComponentScan;\r\nimport org.springframework.context.annotation.Configuration;\r\n\r\n@Configuration\r\n@ComponentScan(basePackages = \"app\")\r\npublic class AppConfig {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/app/config/AppConfig.java b/src/main/java/app/config/AppConfig.java
+--- a/src/main/java/app/config/AppConfig.java	(revision c5937ff3d86ca96d723141c887ee150c306f49e4)
++++ b/src/main/java/app/config/AppConfig.java	(date 1709469335858)
+@@ -1,9 +1,22 @@
+ package app.config;
+ 
++import app.model.Animal;
++import app.model.AnimalsCage;
++import app.model.Dog;
++import org.springframework.context.annotation.Bean;
+ import org.springframework.context.annotation.ComponentScan;
+ import org.springframework.context.annotation.Configuration;
+ 
+ @Configuration
+ @ComponentScan(basePackages = "app")
+ public class AppConfig {
++
++    @Bean
++    public AnimalsCage getAnimalCage() {
++        AnimalsCage animalsCage = new AnimalsCage();
++
++        return animalsCage;
++    }
++
++
+ }
+Index: src/main/java/app/model/Animal.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package app.model;\r\n\r\npublic abstract class Animal {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/app/model/Animal.java b/src/main/java/app/model/Animal.java
+--- a/src/main/java/app/model/Animal.java	(revision c5937ff3d86ca96d723141c887ee150c306f49e4)
++++ b/src/main/java/app/model/Animal.java	(date 1709417700313)
+@@ -1,4 +1,7 @@
+ package app.model;
+ 
++import org.springframework.stereotype.Component;
++
++@Component
+ public abstract class Animal {
+ }
+Index: src/main/java/app/model/Cat.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package app.model;\r\n\r\nimport org.springframework.stereotype.Component;\r\n\r\n@Component\r\npublic class Cat extends Animal {\r\n    @Override\r\n    public String toString() {\r\n        return \"Im a Cat\";\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/app/model/Cat.java b/src/main/java/app/model/Cat.java
+--- a/src/main/java/app/model/Cat.java	(revision c5937ff3d86ca96d723141c887ee150c306f49e4)
++++ b/src/main/java/app/model/Cat.java	(date 1709469219867)
+@@ -2,7 +2,7 @@
+ 
+ import org.springframework.stereotype.Component;
+ 
+-@Component
++@Component("catBean")
+ public class Cat extends Animal {
+     @Override
+     public String toString() {
+Index: src/main/java/app/model/AnimalsCage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package app.model;\r\n\r\nimport org.springframework.beans.factory.annotation.Autowired;\r\nimport org.springframework.stereotype.Component;\r\n\r\n@Component\r\npublic class AnimalsCage {\r\n\r\n    @Autowired\r\n    private Animal animal;\r\n\r\n    public void whatAnimalSay() {\r\n        System.out.println(\"Say:\");\r\n        System.out.println(animal.toString());\r\n        System.out.println(\"At:\");\r\n        System.out.println(new Timer().getTime());\r\n        System.out.println(\"________________________\");\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/app/model/AnimalsCage.java b/src/main/java/app/model/AnimalsCage.java
+--- a/src/main/java/app/model/AnimalsCage.java	(revision c5937ff3d86ca96d723141c887ee150c306f49e4)
++++ b/src/main/java/app/model/AnimalsCage.java	(date 1709478896253)
+@@ -1,19 +1,29 @@
+ package app.model;
+ 
+ import org.springframework.beans.factory.annotation.Autowired;
++import org.springframework.beans.factory.annotation.Qualifier;
+ import org.springframework.stereotype.Component;
+ 
+-@Component
++@Component("animalsCageBean")
+ public class AnimalsCage {
+ 
+     @Autowired
++    @Qualifier("dogBean")
+     private Animal animal;
+ 
++    @Autowired
++    private Timer timer;
++
+     public void whatAnimalSay() {
+         System.out.println("Say:");
+         System.out.println(animal.toString());
+         System.out.println("At:");
+-        System.out.println(new Timer().getTime());
++
++        System.out.println(getTimer().getTime());
+         System.out.println("________________________");
+     }
++
++    public Timer getTimer() {
++        return timer;
++    }
+ }
+Index: src/main/java/app/Application.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package app;\r\n\r\nimport app.config.AppConfig;\r\nimport app.model.AnimalsCage;\r\nimport org.springframework.context.ApplicationContext;\r\nimport org.springframework.context.annotation.AnnotationConfigApplicationContext;\r\n\r\npublic class Application {\r\n\r\n    public static void main(String[] args) {\r\n        ApplicationContext applicationContext =\r\n                new AnnotationConfigApplicationContext(AppConfig.class);\r\n        for (int i = 0; i < 5; i++) {\r\n            AnimalsCage bean =\r\n                    applicationContext.getBean(AnimalsCage.class);\r\n            bean.whatAnimalSay();\r\n        }\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/app/Application.java b/src/main/java/app/Application.java
+--- a/src/main/java/app/Application.java	(revision c5937ff3d86ca96d723141c887ee150c306f49e4)
++++ b/src/main/java/app/Application.java	(date 1709478896257)
+@@ -1,6 +1,7 @@
+ package app;
+ 
+ import app.config.AppConfig;
++import app.model.Animal;
+ import app.model.AnimalsCage;
+ import org.springframework.context.ApplicationContext;
+ import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+@@ -12,9 +13,8 @@
+                 new AnnotationConfigApplicationContext(AppConfig.class);
+         for (int i = 0; i < 5; i++) {
+             AnimalsCage bean =
+-                    applicationContext.getBean(AnimalsCage.class);
++                     applicationContext.getBean("animalsCageBean", AnimalsCage.class);
+             bean.whatAnimalSay();
+         }
+     }
+-
+ }
+Index: src/main/java/app/model/Dog.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/main/java/app/model/Dog.java b/src/main/java/app/model/Dog.java
+new file mode 100644
+--- /dev/null	(date 1709469219851)
++++ b/src/main/java/app/model/Dog.java	(date 1709469219851)
+@@ -0,0 +1,8 @@
++package app.model;
++
++import org.springframework.stereotype.Component;
++
++@Component("dogBean")
++public class Dog extends Animal {
++
++}
